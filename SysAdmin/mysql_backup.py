@@ -1,22 +1,9 @@
 #!/usr/bin/python
 
-
-
-
-import sys
-import string
-import shutil
-import getopt
 import os
 import os.path
-import syslog
-import errno
 import logging
-import tempfile
 import datetime
-import subprocess
-import tarfile
-import boto3
 
 
 from operator import itemgetter
@@ -50,12 +37,16 @@ class MysqlBackup:
         print(tstamp)
         dblist = self.get_dblist()
         skip = ["information_schema", "performance_schema", "test"]
+        if not os.path.exists(self.store):
+            os.mkdir(self.store)
 
 
         for db in dblist:
             if db in skip:
                 continue
-            #print(db)
+
+
+
             dbbackup_name = tstamp+"_"+db+".sql"
             dbbackup_path = self.store+dbbackup_name
             dump_cmd = "mysqldump -u " + self.user
