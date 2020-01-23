@@ -17,7 +17,12 @@ Regards,
 Me"""
 
 html = """
-<html><body><p>Hello, Friend.</p>
+<html><body><style> 
+ table, th, td {{ border: 1px solid black; border-collapse: collapse; }}
+  th, td {{ padding: 5px; }}
+</style>
+</head>
+<p>Hello, Friend.</p>
 <p>Here is your data:</p>
 {table}
 <p>Regards,</p>
